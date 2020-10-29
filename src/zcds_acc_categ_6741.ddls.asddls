@@ -8,5 +8,5 @@ define view ZCDS_ACC_CATEG_6741
 {
       //ztb_acc_categ_67
   key bi_categ    as category,
-  key tipo_acceso as access_type
+  key tipo_acceso as accesstype
 }

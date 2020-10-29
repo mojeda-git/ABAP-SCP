@@ -1,0 +1,84 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Libro',
+    typeNamePlural: 'Libros',
+    typeImageUrl: '',
+    imageUrl: 'Imagen',
+    title: {
+        type: #STANDARD,
+        label: '',
+        iconUrl: '',
+        criticality: '',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'idlibro',
+        valueQualifier: '',
+        targetElement: '',
+        url: ''
+    },
+    description: {
+        type: #STANDARD,
+        label: '',
+        iconUrl: '',
+        criticality: '',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'Titulo',
+        valueQualifier: '',
+        targetElement: '',
+        url: ''
+    }
+}
+@Search.searchable: true
+annotate view Z_I_bookshop_6741 with
+{
+  @UI.facet: [{ id: 'DetallesLibro', label: 'Detalles del libro', type: #COLLECTION, position: 10 },
+              { id: 'Libro', parentId: 'DetallesLibro', label: 'Detalles', type: #FIELDGROUP_REFERENCE,
+              targetQualifier: 'DetallesLibro' , position:  10 } ,
+              { id: 'Clientes', label: 'Clientes', type: #LINEITEM_REFERENCE, targetElement: '_custbook', position: 20 },
+              { id: 'Cliente', parentId: 'Clientes', label: 'Detalles', type: #LINEITEM_REFERENCE }]
+
+
+
+  @UI.lineItem: [{ position: 10, importance: #LOW }]
+  idlibro;
+
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  @UI.selectionField: [{ position: 10 }]
+  Titulo;
+
+  @UI.lineItem: [{ position: 30, importance: #HIGH }]
+  @UI.selectionField: [{ position: 20 }]
+  @Consumption.valueHelpDefinition: [{ entity.name: 'ZCDS_CATEGO_6741', entity.element: 'category' }]
+  category;
+
+
+  @UI.lineItem: [{ position: 40, importance: #HIGH }]
+  @Search: {
+      defaultSearchElement: true,
+      ranking: #MEDIUM,
+      fuzzinessThreshold: 0.8
+  }
+  Editorial;
+
+  @UI.lineItem: [{ position: 50, importance: #LOW }]
+  Paginas;
+
+  @UI.lineItem: [{ position: 60, importance: #LOW }]
+  Precio;
+
+  @UI.lineItem: [{ position: 70, importance: #LOW }]
+  Moneda;
+
+  @UI.lineItem: [{ position: 80, importance: #LOW, criticality: 'Ventas' }]
+  Ventas;
+
+  @UI.fieldGroup: [{ qualifier: 'DetallesLibro', position: 10 }]
+  Autor;
+
+  @UI.fieldGroup: [{ qualifier: 'DetallesLibro', position: 20 }]
+  Idioma;
+  
+    @UI.fieldGroup: [{ qualifier: 'Clientes', position: 10 }]
+  _custbook;
+  
+  
+}
